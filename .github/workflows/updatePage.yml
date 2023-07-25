@@ -17,8 +17,6 @@ jobs:
         with:
           since_last_remote_commit: true
           json: true
-        run: |
-          ls .github/outputs
 
       - name: List all changed files
         run: |
