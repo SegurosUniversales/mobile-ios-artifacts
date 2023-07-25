@@ -16,6 +16,9 @@ jobs:
         uses: tj-actions/changed-files@v37
         with:
           since_last_remote_commit: true
+          json: true
+        run: |
+          ls .github/outputs
 
       - name: List all changed files
         run: |
