@@ -23,3 +23,11 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done 
+          
+      - name: Get commit info
+        run: | 
+          echo ${{github.event.commits[0].message}} 
+          for item in ${{ github.event.commits[0].added }}; do
+            echo "$file"
+          done
+          echo ${{github.event.ref}}  
