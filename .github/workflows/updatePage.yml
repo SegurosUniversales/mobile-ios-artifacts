@@ -11,18 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v37
-        with:
-          since_last_remote_commit: true
-          json: true
-
-      - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done 
+      - name: Get commit info
+        run: |          
+          echo "app=${{github.event.commits[0].message}} | cut -d\" \"  -f1" >> "$GITHUB_ENV"
+          for item in ${{ github.event.commits[0].added }}; do
+            echo "$file"
+          done
+          for item in ${{ github.event.commits[0].modified }}; do
+            echo "$file"
+          done
+          echo ${{github.event.ref}}  
 
       - name: Get files from config folder
         id: dir
@@ -35,4 +33,6 @@ jobs:
           _format-key: '%%key%%'
           files: ${{ steps.dir.outputs.files }}
 
-      - run: cat index.html
+      - name: abc
+        run: |
+          echo "${{ env.app }}"
