@@ -23,3 +23,16 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done 
+
+      - name: Get files from config folder
+        id: dir
+        run: echo "::set-output name=files::$(ls -m config | sed -r 's/([a-z0-9]+\.ya?ml)/"\1"/gi')"
+
+      - uses: bluwy/substitute-string-action@v1
+        with:
+          _input-file: 'index.html'
+          _output-file: 'index.html'
+          _format-key: '%%key%%'
+          files: ${{ steps.dir.outputs.files }}
+
+      - run: cat index.html
