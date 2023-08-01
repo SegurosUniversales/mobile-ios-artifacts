@@ -26,7 +26,7 @@ jobs:
 
       - name: Get files from config folder
         id: dir
-        run: echo "::set-output name=files::$(ls -m config | sed -r 's/([a-z0-9]+\.ya?ml)/"\1"/gi')"
+        run: echo "name=files::$(ls -m config | sed -r 's/([a-z0-9]+\.ya?ml)/"\1"/gi')" >> $GITHUB_OUTPUT
 
       - uses: bluwy/substitute-string-action@v1
         with:
