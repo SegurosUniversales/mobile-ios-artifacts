@@ -13,7 +13,7 @@ jobs:
 
       - name: Get commit info
         run: |          
-          echo "app=${{github.event.commits[0].message}} | cut -d\" \"  -f1" >> "$GITHUB_ENV"
+          echo "app=$({{github.event.commits[0].message}} | cut -d\" \"  -f1)" >> "$GITHUB_ENV"
           for item in ${{ github.event.commits[0].added }}; do
             echo "$file"
           done
