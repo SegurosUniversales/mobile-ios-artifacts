@@ -14,31 +14,26 @@ jobs:
       - name: Get commit info
         run: |          
           cat >> "$GITHUB_ENV" << EOF
-          app=$(echo "${{github.event.commits[0].message}}" | cut -d' '  -f1)
+          app=$(echo "${{github.event.commits[0].message}}" | cut -d'-'  -f1)
+          version=$(echo "${{github.event.commits[0].message}}" | cut -d'-'  -f2)
           EOF
-          
-          
-          
-          
-           
+                     
           for item in ${{ github.event.commits[0].added }}; do
             echo "$file"
           done
+         
           for item in ${{ github.event.commits[0].modified }}; do
             echo "$file"
           done
+         
           echo ${{github.event.ref}}  
-
-      - name: Get files from config folder
-        id: dir
-        run: echo "name=files::$(ls -m config | sed -r 's/([a-z0-9]+\.ya?ml)/"\1"/gi')" >> $GITHUB_OUTPUT
 
       - uses: bluwy/substitute-string-action@v1
         with:
-          _input-file: 'index.html'
+          _input-file: 'base-index.html'
           _output-file: 'index.html'
-          _format-key: '%%key%%'
-          files: ${{ steps.dir.outputs.files }}
+          _format-key: '%%app.key%%'
+          app.version: hola
 
       - name: abc
         run: |

@@ -1,5 +1,0 @@
-apps:
-  ajustadores:
-    version: 1.0.0
-    compilacion: 25
-    package: com.universales.ajustadores
