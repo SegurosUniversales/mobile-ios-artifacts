@@ -39,4 +39,3 @@ jobs:
         run: |
           echo "${{ env.app }}"
           echo "${{ steps.replace.outputs.result }}"
-          cat index.html
