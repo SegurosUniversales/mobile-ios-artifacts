@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "web" ]
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,6 +28,7 @@ jobs:
           echo ${{github.event.ref}}  
 
       - uses: bluwy/substitute-string-action@v1
+        id: replace
         with:
           _input-file: 'base-index.html'
           _output-file: 'index.html'
@@ -38,3 +38,4 @@ jobs:
       - name: abc
         run: |
           echo "${{ env.app }}"
+          echo ${{ steps.replace.outputs.result }}
