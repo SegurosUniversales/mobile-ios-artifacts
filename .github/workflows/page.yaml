@@ -27,6 +27,6 @@ jobs:
       - uses: w9jds/setup-firebase@main
         with:
           tools-version: 11.9.0
-          firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+          GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
 
       - run: firebase --project fir-test-b549f database:get "/"
