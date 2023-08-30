@@ -1,4 +1,4 @@
-name: CI
+name: WEB PAGE
 
 on:
   push:
@@ -24,10 +24,9 @@ jobs:
             echo "$file was changed"
           done
           
-      - name: abc
-        uses: w9jds/firebase-action@master
-        with: 
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-           
-      - run: |
-          firebase --project fir-test-b549f database:get
+      - uses: w9jds/setup-firebase@main
+        with:
+          tools-version: 11.9.0
+          firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+
+      - run: firebase --project fir-test-b549f database:get
