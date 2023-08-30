@@ -24,10 +24,10 @@ jobs:
             echo "$file was changed"
           done
           
-
-      - name: Read DBRT
+      - name: abc
         uses: w9jds/firebase-action@master
-        with:
+        with: 
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: |
+           
+      - run: |
           firebase --project fir-test-b549f database:get
