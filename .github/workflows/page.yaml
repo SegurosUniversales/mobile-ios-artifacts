@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "web" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v37
+        with:
+          since_last_remote_commit: true
+          json: true
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+          
+
+      - name: Read DBRT
+        uses: w9jds/firebase-action@master
+        with:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          firebase --project fir-test-b549f database:get
