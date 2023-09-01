@@ -43,7 +43,7 @@ jobs:
           tools-version: 11.9.0
           GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
 
-      - run: git checkout -b resources && var=$(firebase --project fir-test-b549f database:get "/") && touch app.json && echo $var >> app.json && git add app.json
+      - run: git checkout -b resources && var=$(firebase --project fir-test-b549f database:get "/") && touch app.json && echo $var >> app.json
 
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v16
