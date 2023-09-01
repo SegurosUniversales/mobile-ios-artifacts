@@ -1,7 +1,7 @@
 fetch('./app.json')
     .then((response) => response.json())
     .then((json) => {
-        let ul = document.getElementById("apps-list");
+        let ul = document.getElementById("apps-list-container");
 
         console.log(json);
         for (const app in json) {
