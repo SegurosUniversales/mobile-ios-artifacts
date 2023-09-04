@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: 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 #'${{ secrets.GITHUB_TOKEN }}'
+          repoToken: '${{ secrets.GITHUB_TOKEN }}' #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
           firebaseServiceAccount: ${{ secrets.FIREBASE_TOKEN }}
           channelId: live
           projectId: fir-test-b549f
