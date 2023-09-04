@@ -44,7 +44,8 @@ jobs:
         with:
           tools-version: 11.9.0
           GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
-        run: var=$(firebase --project fir-test-b549f database:get "/") && echo $var >> app.json
+    
+      - run: var=$(firebase --project fir-test-b549f database:get "/") && echo $var >> app.json
 
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v16
