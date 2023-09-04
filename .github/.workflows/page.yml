@@ -1,0 +1,61 @@
+name: WEB PAGE
+
+on:
+  push:
+    branches: [ "fb-hosting" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v37
+        with:
+          since_last_remote_commit: true
+          json: true
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: Git config 
+        run:  git config user.email "jculajay@universales.com" && git config user.name "jculajayuniversales"
+        
+      - name: Check app.json file existence
+        id: check_files
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "app.json"
+
+      - name: If app.json exists
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: touch -c app.json
+
+      - name: add firebase output app.json
+        uses: w9jds/setup-firebase@main
+        with:
+          tools-version: 11.9.0
+          GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
+        run: var=$(firebase --project fir-test-b549f database:get "/") && echo $var >> app.json
+
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v16
+        id: verify-changed-files
+        with:
+          files: "app.json"
+
+      - name: Run step only when any of the above files change.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: git add . && 
+             git commit -m "update app.json" && 
+             git push --set-upstream https://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@github.com/SegurosUniversales/mobile-ios-artifacts.git fb-hosting &&
+             git checkout resources && 
+             git merge fb-hosting
+             
+        
