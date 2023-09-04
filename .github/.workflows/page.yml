@@ -1,4 +1,4 @@
-name: WEB PAGE
+name: UPDATE APPJSON
 
 on:
   push:
@@ -32,6 +32,8 @@ jobs:
         uses: andstor/file-existence-action@v2
         with:
           files: "app.json"
+
+      - run: git checkout -b update
 
       - name: If app.json exists
         if: steps.check_files.outputs.files_exists == 'false'
