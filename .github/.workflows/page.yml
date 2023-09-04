@@ -60,6 +60,6 @@ jobs:
              git push --set-upstream origin update &&
              git checkout resources && 
              git merge update &&
-             git push
+             git push && cat app.json
              
         
