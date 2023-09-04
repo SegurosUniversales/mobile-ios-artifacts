@@ -1,19 +1,17 @@
-fetch('./app.json')
-    .then((response) => response.json())
-    .then((json) => {
-        let ul = document.getElementById("apps-list-container");
-
-        console.log(json);
-        for (const app in json) {
-            if (Object.hasOwnProperty.call(json, app)) {
-                const element = json[app];
-                let li = `<li>
-                <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/Ajustadores/${element.version}/manifest.plist">
-                    <img src="imgs/logoApp.svg" alt="${app}"> Ajustadores
-                    <span>${element.package}</span>
-                </a>
-            </li>`;
-                ul.innerHTML += li.trim();   
-            }
-        }
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const loadEl = document.querySelector('#load');
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    // // The Firebase SDK is initialized and available here!
+    //
+    // firebase.auth().onAuthStateChanged(user => { });
+    // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+    // firebase.firestore().doc('/foo/bar').get().then(() => { });
+    // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+    // firebase.messaging().requestPermission().then(() => { });
+    // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+    // firebase.analytics(); // call to activate
+    // firebase.analytics().logEvent('tutorial_completed');
+    // firebase.performance(); // call to activate
+    //
+    // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  });
