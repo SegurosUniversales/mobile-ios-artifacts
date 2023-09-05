@@ -6,7 +6,7 @@ fetch('./app.json')
         for (const app in json) {
             if (Object.hasOwnProperty.call(json, app)) {
                 const element = json[app];
-                let li = li = `<li>
+                let li = `<li>
                 <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${app}/${element.version}/manifest.plist" title="v: ${element.version}">
                     <img src="imgs/logoApp.svg" alt="${app}"> 
                    Ajustadores
