@@ -14,13 +14,13 @@ fetch('./app.json')
                     itemIos = `<li>
                         <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${app}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app.charAt(0)}
+                        ${app}
                         </a>
                     </li>`;
                     itemAnd = `<li>
                         <a href="https://apps.universales.com/${app}/${element.version}/${app}" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app.charAt(0)}
+                        ${app}
                         </a>
                     </li>`;
                     ulIos.innerHTML += itemIos.trim();
@@ -30,7 +30,7 @@ fetch('./app.json')
                     itemIos = `<li>
                         <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${app}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app.charAt(0)}
+                        ${app}
                         </a>
                     </li>`;
                     ulIos.innerHTML += itemIos.trim();   
@@ -39,7 +39,7 @@ fetch('./app.json')
                     itemAnd = `<li>
                         <a href="https://apps.universales.com/${app}/${element.version}/${app}" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app.charAt(0)}
+                        ${app}
                         </a>
                     </li>`;
                     ulAnd.innerHTML += itemAnd.trim();
