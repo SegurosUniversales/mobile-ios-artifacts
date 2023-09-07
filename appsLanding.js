@@ -37,7 +37,7 @@ fetch('./app.json')
                     break;
                     case 2: // Android
                     itemAnd = `<li>
-                        <a href="https://apps.universales.com/${app}/${element.version}/${element.filename}" title="v: ${element.version}" download>
+                        <a href="https://apps.universales.com/${app}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
                         ${app}
                         </a>
