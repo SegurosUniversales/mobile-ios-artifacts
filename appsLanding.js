@@ -5,12 +5,12 @@ fetch('./app.json')
         let ulAnd = document.getElementById("android-apps-list-container");
         let itemIos = "";
         let itemAnd = "";
-        for (const app in json) {
-            if (Object.hasOwnProperty.call(json, app)) {
-                const element = json[app];
+        for (const artifact in json) {
+            if (Object.hasOwnProperty.call(json, artifact)) {
+                const element = json[artifact];
 
-                app[0].toUpperCase() + app.substring(1);
-
+                let app = artifact[0].toUpperCase() + artifact.substring(1);
+                
                 switch(element.type){
                     case 0: // IOS && Android
                     itemIos = `<li>
@@ -20,7 +20,7 @@ fetch('./app.json')
                         </a>
                     </li>`;
                     itemAnd = `<li>
-                        <a href="https://apps.universales.com/${app}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
+                        <a href="https://apps.universales.com/${artifact}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
                         ${app}
                         </a>
@@ -30,7 +30,7 @@ fetch('./app.json')
                     break;
                     case 1: // IOS
                     itemIos = `<li>
-                        <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${app}/${element.version}/manifest.plist" title="v: ${element.version}">
+                        <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${artifact}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
                         ${app}
                         </a>
@@ -39,7 +39,7 @@ fetch('./app.json')
                     break;
                     case 2: // Android
                     itemAnd = `<li>
-                        <a href="https://apps.universales.com/${app}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
+                        <a href="https://apps.universales.com/${artifact}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
                         ${app}
                         </a>
