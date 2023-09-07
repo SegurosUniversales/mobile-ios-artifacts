@@ -8,7 +8,9 @@ fetch('./app.json')
         for (const app in json) {
             if (Object.hasOwnProperty.call(json, app)) {
                 const element = json[app];
-                
+
+                app[0].toUpperCase() + app.substring(1);
+
                 switch(element.type){
                     case 0: // IOS && Android
                     itemIos = `<li>
