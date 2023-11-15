@@ -63,7 +63,7 @@ jobs:
             git commit -m "update app.json" && 
             git push --set-upstream &&
             git merge temp-web &&
-            git status
+            git status && git push
             
              
         
