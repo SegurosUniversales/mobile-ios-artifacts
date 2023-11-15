@@ -1,5 +1,5 @@
 name: UPDATE APPJSON
-
+permissions: write-all
 on:
   push:
     branches: [ "temp-web" ]
