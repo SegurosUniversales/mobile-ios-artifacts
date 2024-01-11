@@ -50,7 +50,7 @@ jobs:
       - run: var=$(firebase --project fir-test-b549f database:get "/") && echo $var > app.json
 
       - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v16
+        uses: tj-actions/verify-changed-files@v17
         id: verify-changed-files
         with:
           files: "app.json"
