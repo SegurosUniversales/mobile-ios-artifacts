@@ -14,7 +14,7 @@ fetch('./app.json')
                 switch(element.type){
                     case 0: // IOS && Android
                     itemIos = `<li>
-                        <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${app}/${element.version}/manifest.plist" title="v: ${element.version}">
+                        <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${artifact}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
                         ${app}
                         </a>
