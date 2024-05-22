@@ -16,14 +16,12 @@ fetch('./app.json')
                     itemIos = `<li>
                         <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${artifact}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app}
                             <div class="truncate-multiline">${app}</div>
                         </a>
                     </li>`;
                     itemAnd = `<li>
                         <a href="https://apps.universales.com/${artifact}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app}
                             <div class="truncate-multiline">${app}</div>
                         </a>
                     </li>`;
@@ -34,7 +32,6 @@ fetch('./app.json')
                     itemIos = `<li>
                         <a href="itms-services://?action=download-manifest&url=https://apps.universales.com/${artifact}/${element.version}/manifest.plist" title="v: ${element.version}">
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app}
                             <div class="truncate-multiline">${app}</div>
                         </a>
                     </li>`;
@@ -44,7 +41,6 @@ fetch('./app.json')
                     itemAnd = `<li>
                         <a href="https://apps.universales.com/${artifact}/${element.version}/${element.filename}.apk" title="v: ${element.version}" download>
                             <img src="imgs/logoApp.svg" alt="${app}"> 
-                        ${app}
                             <div class="truncate-multiline">${app}</div>
                         </a>
                     </li>`;
