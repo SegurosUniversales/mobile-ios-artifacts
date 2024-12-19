@@ -3,14 +3,14 @@ name: Clean and Update Artifacts
 on:
   push:
     branches:
-      - main
+      - web
 
 jobs:
   clean_and_update:
     runs-on: ubuntu-latest
     
     env:
-      ARTIFACT: golf         # Nombre del artefacto
+      ARTIFACT: cotizador         # Nombre del artefacto
 
     steps:
     # Configurar el repositorio
