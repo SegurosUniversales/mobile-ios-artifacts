@@ -1,0 +1,45 @@
+name: Clean and Update Artifacts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  clean_and_update:
+    runs-on: ubuntu-latest
+    
+    env:
+      ARTIFACT: golf         # Nombre del artefacto
+
+    steps:
+    # Configurar el repositorio
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Configurar jq
+    - name: Install dependencies
+      run: sudo apt-get install -y jq
+      
+    # Obtener la última versión y calcular el nuevo número
+    - name: Get and increment build number
+      run: |
+        set -x
+        LAST_VERSION=$(cat app.json | jq -r ".$ARTIFACT.version")
+        BUILD_NUMBER=$(echo "$LAST_VERSION" | awk -F'-' '{print $2}')
+        COMPILADO=$((BUILD_NUMBER + 1))
+        echo "Last version: $LAST_VERSION"
+        echo "New build number: $COMPILADO"
+
+    # Limpiar las carpetas excepto la última versión
+    - name: Clean up directories
+      run: |
+        set -x
+        if [ -d "$ARTIFACT" ]; then
+          if [ -z "$LAST_VERSION" ] || [ "$LAST_VERSION" == "null" ]; then
+            echo "No se encontró la última versión"
+          else
+            echo "Última versión que se conservará: $LAST_VERSION"
+            ls -t "$ARTIFACT" | grep -v "$LAST_VERSION" | xargs -I {} echo "Eliminar: $ARTIFACT/{}"
+          fi
+        fi
