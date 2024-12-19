@@ -31,6 +31,10 @@ jobs:
         echo "Last version: $LAST_VERSION"
         echo "New build number: $COMPILADO"
 
+        # Exportar variables como output
+        echo "LAST_VERSION=$LAST_VERSION" >> $GITHUB_ENV
+        echo "COMPILADO=$COMPILADO" >> $GITHUB_ENV
+
     # Limpiar las carpetas excepto la última versión
     - name: Clean up directories
       run: |
