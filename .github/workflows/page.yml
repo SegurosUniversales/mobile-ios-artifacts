@@ -1,9 +1,8 @@
-name: UPDATE APPJSON
+name: deploy_apps
 permissions: write-all
 on:
   push:
     branches: [ "temp-web" ]
-  workflow_dispatch:
 
 jobs:
   build:
