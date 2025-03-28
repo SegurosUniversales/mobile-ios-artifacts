@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - web
+  workflow_run:
+    workflows:
+      - deploy_apps
+    types:
+      - completed
 
 jobs:
   clean_and_update:
