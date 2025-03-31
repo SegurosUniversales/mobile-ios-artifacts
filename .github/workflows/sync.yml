@@ -1,0 +1,57 @@
+name: Sync Master with Dev
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-branches:
+    name: Sync master with dev
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'jculajayuniversales'
+          git config --global user.email 'jculajay@universales.com'
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Check if dev branch exists
+        id: check-dev
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/temp-web; then
+            echo "Dev branch exists"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Dev branch does not exist"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge master into dev
+        if: steps.check-dev.outputs.exists == 'true'
+        run: |
+          git checkout temp-web
+          git merge origin/web -m "web into temp-web - Automated sync $(date +%Y-%m-%d)"
+          git push origin temp-web
+        continue-on-error: false
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.create({
+              owner: 'jculajayuniversales',
+              repo: context.repo.repo,
+              title: 'Error en la sincronización automática: dev a master',
+              body: 'Se ha producido un error al intentar sincronizar la rama master con la rama dev. Es posible que haya conflictos que requieran resolución manual.'
+            })
