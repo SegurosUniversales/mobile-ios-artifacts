@@ -39,6 +39,6 @@ jobs:
         if: steps.check-dev.outputs.exists == 'true'
         run: |
           git checkout temp-web
-          git merge origin/web -m "web into temp-web - Automated sync $(date +%Y-%m-%d)"
+          git merge origin/web -m "web into temp-web - Automated sync $(date +%Y-%m-%d)" --allow-unrelated-histories
           git push origin temp-web
         continue-on-error: false
