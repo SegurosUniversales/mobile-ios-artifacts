@@ -1,9 +1,6 @@
 name: Sync Master with Dev
 
 on:
-  notifications:
-    - email: apps@universales.com
-      filter: [failed, success]
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
