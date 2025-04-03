@@ -6,39 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync-branches:
-    name: Sync master with dev
+  sync-branch:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@master
+
+      - name: Merge web -> temp-web
+        uses: devmasx/merge-branch@master
         with:
-          fetch-depth: 1
-
-      - name: Configure Git
-        run: |
-          git config --global user.name 'jculajayuniversales'
-          git config --global user.email 'jculajay@universales.com'
-
-      - name: Fetch all branches
-        run: git fetch --all
-
-      - name: Check if dev branch exists
-        id: check-dev
-        run: |
-          if git show-ref --verify --quiet refs/remotes/origin/temp-web; then
-            echo "Dev branch exists"
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "Dev branch does not exist"
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Merge master into dev
-        if: steps.check-dev.outputs.exists == 'true'
-        run: |
-          git checkout temp-web
-          git merge origin/web -m "web into temp-web - Automated sync $(date +%Y-%m-%d)" --allow-unrelated-histories
-          git push origin temp-web
-        continue-on-error: false
+          type: now
+          from_branch: web
+          target_branch: temp-web
+          message: Merge web into temp-web
+          github_token: ${{ secrets.JCULAJAY_GITHUB_TOKEN }}
