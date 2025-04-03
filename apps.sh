@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 set -x
 if [[ -z "$CM_BUILD_OUTPUT_DIR" ]]; then
     echo "CM_BUILD_OUTPUT_DIR is not set"
@@ -23,30 +24,37 @@ if [[ -z "$COMPILADO" ]]; then
     echo "COMPILADO is not set"
     exit 1
 fi
+if [[ -z "$LAST_VERSION" ]]; then
+    echo "LAST_VERSION is not set"
+fi
 
 git clone --depth=1 --branch web git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo
-
-cd repo || echo "repo not found" && exit 1
-
+cd repo || echo "artifact not build"
 git fetch origin temp-web:temp-web --depth=1
-
 git checkout -b "$ARTIFACT/$COMPILADO"
 
+if [[ "$LAST_VERSION" ]]; then
+    for file in "$ARTIFACT"/*;
+    do
+      if [[ "$file" != *"$LAST_VERSION"* ]]; then
+        echo "Eliminar: $file"
+        rm -rf "$file"
+      fi
+    done
+fi
+
 mkdir -p "$ARTIFACT/$COMPILADO"
-
-cd "$ARTIFACT/$COMPILADO/" || echo "artifact not build" && exit 1
-
+cd "$ARTIFACT/$COMPILADO/" || echo "artifact not build"
 cp -r "$CM_BUILD_OUTPUT_DIR/*.ipa" ./
-
 cp -r "$CM_BUILD_OUTPUT_DIR/*.apk" ./
 
 i=0; a=0; for f in *;
 do
     if [[ "$f" == *.ipa ]];
-    then i=$((i+1)) && mv "$f" "app_${ARTIFACT}_$i.${f#*.}";
+      then i=$((i+1)) && mv "$f" "app_${ARTIFACT}_$i.${f#*.}";
     fi;
     if [[ "$f" == *.apk ]];
-    then a=$((a+1)) && mv "$f" "app_${ARTIFACT}_$a.${f#*.}";
+      then a=$((a+1)) && mv "$f" "app_${ARTIFACT}_$a.${f#*.}";
     fi;
 done
 
@@ -66,3 +74,5 @@ git checkout temp-web
 git merge "$ARTIFACT/$COMPILADO" --allow-unrelated-histories --no-edit
 git diff
 git push --set-upstream origin temp-web
+
+exit 0
