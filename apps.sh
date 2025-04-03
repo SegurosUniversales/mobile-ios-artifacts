@@ -67,12 +67,11 @@ echo "$PACKAGE" | xargs -I {} sed -i ''  's|%%package-artifact%%|{}|g' manifest.
 echo "$VERSION" | xargs -I {} sed -i ''  's|%%version-artifact%%|{}|g' manifest.plist
 echo "$ARTIFACT" | xargs -I {} sed -i ''  's|%%name-artifact%%|{}|g' manifest.plist
 
-git add .
+git add -A .
 git commit -m "$ARTIFACT $COMPILADO"
 git push --set-upstream origin "$ARTIFACT/$COMPILADO"
 git checkout temp-web
 git merge "$ARTIFACT/$COMPILADO" --allow-unrelated-histories --no-edit
-git diff
 git push --set-upstream origin temp-web
 
 exit 0
