@@ -18,4 +18,4 @@ jobs:
           from_branch: web
           target_branch: temp-web
           message: Merge web into temp-web
-          github_token: ${{ secrets.JCULAJAY_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
