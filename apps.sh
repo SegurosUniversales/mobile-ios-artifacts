@@ -28,10 +28,10 @@ if [[ -z "$LAST_VERSION" ]]; then
     echo "LAST_VERSION is not set"
 fi
 
-git clone --depth=1 --branch web git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo
-cd repo || echo "artifact not build"
-git fetch origin temp-web:temp-web --depth=1
-git checkout -b "$ARTIFACT/$COMPILADO"
+git clone git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo -b web
+cd repo
+git checkout -b $ARTIFACT/$COMPILADO
+mkdir -p $ARTIFACT/$COMPILADO
 
 if [[ "$LAST_VERSION" ]]; then
     for file in "$ARTIFACT"/*;
@@ -67,11 +67,11 @@ echo "$PACKAGE" | xargs -I {} sed -i ''  's|%%package-artifact%%|{}|g' manifest.
 echo "$VERSION" | xargs -I {} sed -i ''  's|%%version-artifact%%|{}|g' manifest.plist
 echo "$ARTIFACT" | xargs -I {} sed -i ''  's|%%name-artifact%%|{}|g' manifest.plist
 
-git add -A .
+git add . -A
 git commit -m "$ARTIFACT $COMPILADO"
-git push --set-upstream origin "$ARTIFACT/$COMPILADO"
+git push --set-upstream origin $ARTIFACT/$COMPILADO
 git checkout temp-web
-git merge "$ARTIFACT/$COMPILADO" --allow-unrelated-histories --no-edit
-git push --set-upstream origin temp-web
+git merge $ARTIFACT/$COMPILADO
+git push
 
 exit 0
