@@ -13,14 +13,10 @@ jobs:
       - name: sync branch temp-web from web
         run: |
           set x
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git clone git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo -b web
-          cd repo
-          git checkout -b temp-web
-          git pull origin web
-          git checkout -b web
-          git pull origin web
+          git config --global user.name "jculajayuniversales"
+          git config --global user.email "jculajay@universales.com"
+          git status
+          git pull
           git checkout -b temp-web
           git merge web
-          git push origin temp-web
+          git push --set-upstream origin temp-web
