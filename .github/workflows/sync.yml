@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: '${{ secrets.USUARIO_A_CARGO_TOKEN }}'
       - name: sync branch temp-web from web
         run: |
           set x
