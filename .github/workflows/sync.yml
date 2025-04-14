@@ -9,17 +9,18 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      name: sync branch temp-web from web
-      run: |
-        set x
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git clone git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo -b web
-        cd repo
-        git checkout -b temp-web
-        git pull origin web
-        git checkout -b web
-        git pull origin web
-        git checkout -b temp-web
-        git merge web
-        git push origin temp-web
+      - uses: actions/checkout@v4
+      - name: sync branch temp-web from web
+        run: |
+          set x
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo -b web
+          cd repo
+          git checkout -b temp-web
+          git pull origin web
+          git checkout -b web
+          git pull origin web
+          git checkout -b temp-web
+          git merge web
+          git push origin temp-web
