@@ -9,13 +9,16 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merge web -> temp-web
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: web
-          target_branch: temp-web
-          message: Merge web into temp-web
-          github_token: ${{ secrets.SEGUNI_GITHUB_TOKEN }}
+      name: sync branch temp-web from web
+      run: |
+        set x
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git clone git@github.com:SegurosUniversales/mobile-ios-artifacts.git repo -b web
+        cd repo
+        git checkout -b temp-web
+        git pull origin web
+        git checkout -b web
+        git pull origin web
+        git checkout -b temp-web
+        git merge web
